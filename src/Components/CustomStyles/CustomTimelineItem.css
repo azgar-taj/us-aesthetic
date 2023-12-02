@@ -1,0 +1,57 @@
+.text-hoverer {
+    transition: .4s, background-position 0s;
+    color: #ECE3CE;
+}
+
+.text-hoverer:hover {
+    color: #ECE3CE;
+    background: #739072;
+}
+
+@font-face {
+    font-family: customCursiveMini;
+    src: url("C:\\Users\\abtaj\\Downloads\\944d00e1-e5bc-4087-8dcd-d4e3cbaf8612\\fonts\\Moon-Flower-Bold.woff");
+}
+
+.text-limiter {
+    font-family: customCursiveMini;
+    width: fit-content;
+    padding: 6;
+    font-weight: 3;
+    font-size: 2vw;
+}
+
+.image-cropper {
+    aspect-ratio: 1/1;
+    display: flex;
+    align-items: center;
+    width: 45%;
+    position: relative;
+    overflow: hidden;
+    border-radius: 50%;
+    background-color: #739072;
+    justify-content: center;
+    background-image: url("C:\\Users\\abtaj\\Desktop\\Us\\us-v3\\us-v3-star-and-moon\\src\\assests\\dandeli.jpeg");
+    background-blend-mode:soft-light;
+    background-size: cover;
+}
+
+.para-text{
+    text-align: center;
+    font-family: customCursiveMini;
+    line-height: 1;
+    color: #ffffff;
+    font-size: 42;
+}
+
+.margin-me-left{
+    margin-left: auto;
+}
+
+.animate-hover {
+    transition: all 0.2s ease-in-out;
+}
+
+.animate-hover:hover {
+    transform: scale(1.1,1.1)
+}
