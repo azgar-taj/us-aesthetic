@@ -8,11 +8,11 @@
 
 @font-face {
   font-family: customCursive;
-  src: url("C:\\Users\\abtaj\\Downloads\\bfa134b6-0a3c-4fff-bd03-34fce1d99b5e\\fonts\\HathemBosteem.woff");
+  src: url("./assests/fonts/HathemBosteem.woff");
 }
 
 
 @font-face {
   font-family: customCursiveMini;
-  src: url("C:\\Users\\abtaj\\Downloads\\944d00e1-e5bc-4087-8dcd-d4e3cbaf8612\\fonts\\Moon-Flower-Bold.woff");
+  src: url("./assests/fonts/Moon-Flower-Bold.woff");
 }
