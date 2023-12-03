@@ -4,6 +4,8 @@
 
 .custom-backgound {
   background-color: #4F6F52;
+  overflow: scroll;
+  height: 100vh;
 }
 
 @font-face {
