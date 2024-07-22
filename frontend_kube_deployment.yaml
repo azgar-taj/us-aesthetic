@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: us-aesthetic-frontend-deployment
+  labels:
+    app: us-aesthetic-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: us-aesthetic-frontend
+  template:
+    metadata:
+      labels:
+        app: us-aesthetic-frontend
+    spec:
+      containers:
+      - name: us-aesthetic-frontend-container
+        image: asia-south1-docker.pkg.dev/silicon-outcome-427512-i5/us-image-registry/us-aesthetic-us-frontend
+        ports:
+        - containerPort: 80
+        resources:
+          limits:
+            cpu: "1"
+            memory: "512Mi"
+          requests:
+            cpu: "0.5"
+            memory: "256Mi"
+        env:
+        - name: PORT
+          value: "80"

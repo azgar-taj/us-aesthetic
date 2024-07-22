@@ -1,5 +1,5 @@
 import './App.css';
-import CustomizedTimeline from './Components/CustomizedTimeline';
+import CustomTimeline from './Components/CustomTimeline';
 
 function App() {
   return (
@@ -9,7 +9,7 @@ function App() {
         <div style={{fontFamily:'customCursiveMini', color:'#ECE3CE', fontSize: '6vw', paddingTop: 20}}>
           It all starts here...
         </div>
-        <CustomizedTimeline />
+        <CustomTimeline />
       </div>
       
     </div>
