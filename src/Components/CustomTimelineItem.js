@@ -8,8 +8,12 @@ import TimelineDot from '@mui/lab/TimelineDot';
 import './CustomStyles/CustomTimelineItem.css';
 
 const CustomTimelineItem = (props) => {
+    const onClickEvent = (args) => {
+        console.log(args);
+    }
+
     return (
-        <TimelineItem>
+        <TimelineItem onClick={onClickEvent}>
             <TimelineOppositeContent
             sx={{ m: 'auto 0'}}
             color="white"
