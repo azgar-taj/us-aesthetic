@@ -10,7 +10,7 @@ env:
   REPOSITORY: us-image-registry
   GKE_CLUSTER: us-cluster
   GKE_ZONE: asia-south1-a
-  DEPLOYMENT_NAME: gke-us-deployment
+  DEPLOYMENT_NAME: us-aesthetic-frontend-deployment
   IMAGE: us-aesthetic-us-frontend
 
 jobs:
@@ -23,34 +23,40 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
 
-    # Configure Workload Identity Federation and generate an access token.
-    # Setup gcloud CLI
-    - uses: google-github-actions/setup-gcloud@1bee7de035d65ec5da40a31f8589e240eba8fde5
+    - id: 'auth'
+      uses: 'google-github-actions/auth@v2'
       with:
-        service_account_key: ${{ secrets.GKE_SA_KEY }}
+        credentials_json: '${{ secrets.GKE_SA_JSON }}'
+
+    - uses: google-github-actions/setup-gcloud@v2
+      with:
         project_id: ${{ secrets.GKE_PROJECT }}
 
-    # Configure Docker to use the gcloud command-line tool as a credential
-    # helper for authentication
-    - run: |-
-        gcloud --quiet auth configure-docker
-
-    # Get the GKE credentials so we can deploy to the cluster
-    - uses: google-github-actions/get-gke-credentials@db150f2cc60d1716e61922b832eae71d2a45938f
+    - id: 'get-credentials'
+      uses: 'google-github-actions/get-gke-credentials@v2'
       with:
         cluster_name: ${{ env.GKE_CLUSTER }}
         location: ${{ env.GKE_ZONE }}
-        credentials: ${{ secrets.GKE_SA_KEY }}
-  
-    # Build the Docker image
+        project_id: ${{ secrets.GKE_PROJECT }}
+
     - name: Build
       run: |-
         docker build \
-          --tag "$GAR_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE:$GITHUB_SHA" \
-          --build-arg GITHUB_SHA="$GITHUB_SHA" \
-          --build-arg GITHUB_REF="$GITHUB_REF" \
-          .
-    # Push the Docker image to Google Artifact Registry
-    - name: Publish
+          --tag "$GAR_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE:latest" .
+
+    - name: Publish Docker Image to Artifact Registry
       run: |-
-        docker push "$GAR_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE:$GITHUB_SHA"
+        gcloud auth print-access-token | docker login -u oauth2accesstoken --password-stdin https://$GAR_LOCATION-docker.pkg.dev
+        docker push "$GAR_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE:latest"
+
+    - name: Deploy to GKE
+      run: |-
+        echo "Apply the Kubernetes configuration files"
+        kubectl apply -f frontend_kube_deployment.yaml
+        kubectl apply -f frontend_kube_app.yaml
+        echo "Get status of the config applied"
+        kubectl get service us-aesthetic-frontend-app
+        kubectl rollout status deployment/$DEPLOYMENT_NAME
+        echo "Restart the deployment to apply the changes"
+        kubectl rollout restart deployment $DEPLOYMENT_NAME
+        kubectl rollout status deployment/$DEPLOYMENT_NAME
