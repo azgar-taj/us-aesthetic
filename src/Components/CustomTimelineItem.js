@@ -13,7 +13,7 @@ const CustomTimelineItem = (props) => {
     }
 
     return (
-        <TimelineItem onClick={onClickEvent}>
+        <TimelineItem key={props.id} onClick={onClickEvent}>
             <TimelineOppositeContent
             sx={{ m: 'auto 0'}}
             color="white"
@@ -34,7 +34,7 @@ const CustomTimelineItem = (props) => {
                 <div style={{backgroundImage: `url(${props.imageUrl})`}}
                     className={'image-cropper'+ (Number(props.id)%2 !== 0 ? ' margin-me-left' : '') +' animate-hover'}>
                     <p className='para-text' style={{fontSize: '4vw'}}>
-                        {props.content.split(' ').map((word) => {return (<>{word} <br/></>)})}
+                        {props.content.split(' ').map((word, index) => {return (<React.Fragment key={index}>{word} <br/></React.Fragment>)})}
                     </p>
                 </div>
             </TimelineContent>
