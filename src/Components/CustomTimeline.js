@@ -21,8 +21,8 @@ const dictData = [ {date: '27th January 2023', title: 'The First Sight', imageUr
                 {date: '3rd February 2023', title: 'Way to Her', imageUrl: wayToHerImage},
                 {date: '29th March 2023', title: 'The College Day', imageUrl: collegeDayImage},
                 {date: '29th April 2023', title: 'Days of Work', imageUrl: daysOfWorkImage},
-                {date: '15th May 2023', title: 'The First Gift', imageUrl: wayToHerImage},
-                {date: '23rd June 2023', title: 'The First Love', imageUrl: wayToHerImage}]
+                {date: '15th May 2023', title: 'The Job Interview', imageUrl: wayToHerImage},
+                {date: '23rd June 2023', title: 'Julious July', imageUrl: wayToHerImage}]
 
 export default function CustomTimeline() {
   return (
