@@ -5,7 +5,7 @@ metadata:
   labels:
     app: us-aesthetic-frontend
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: us-aesthetic-frontend
@@ -24,7 +24,7 @@ spec:
             cpu: "1"
             memory: "512Mi"
           requests:
-            cpu: "0.25"
+            cpu: "0.5"
             memory: "256Mi"
         env:
         - name: PORT
