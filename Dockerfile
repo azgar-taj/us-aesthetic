@@ -1,10 +1,12 @@
 FROM node:20.0.0-alpine AS build
 
-COPY . /home/node/src
+COPY ./package.json /home/node/src/package.json
 
 WORKDIR /home/node/src
 
 RUN npm install
+
+COPY . /home/node/src
 
 RUN npm run build
 

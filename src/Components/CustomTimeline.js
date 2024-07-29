@@ -17,17 +17,20 @@ const icons = [<StarIcon htmlColor='#eee8aa' />,
                <NightlightRoundRoundedIcon htmlColor='#eee8aa' />]
 
 
-const dictData = [ {date: '27th January 2023', title: 'The First Sight', imageUrl: dandeliImage},
-                {date: '3rd February 2023', title: 'Way to Her', imageUrl: wayToHerImage},
-                {date: '29th March 2023', title: 'The College Day', imageUrl: collegeDayImage},
-                {date: '29th April 2023', title: 'Days of Work', imageUrl: daysOfWorkImage},
-                {date: '15th May 2023', title: 'The Job Interview', imageUrl: wayToHerImage},
-                {date: '23rd June 2023', title: 'Julious July', imageUrl: wayToHerImage}]
 
 export default function CustomTimeline() {
+  const [storyData, setStoryData] = React.useState([]);
+  React.useEffect(() => {
+    console.log('Fetching data');
+    fetch('http://api.starandmoon.life/GetAllStoriesData')
+      .then(response => response.json())
+      .then(data => setStoryData(data))
+      .catch(error => console.log(error));
+    console.log('Data fetched');
+  }, []);
   return (
     <Timeline position="alternate">
-      {dictData.map((data, index) => {
+      {storyData.map((data, index) => {
         return <CustomTimelineItem key={index} id={index} date={data.date} content={data.title} imageUrl={data.imageUrl} icon={icons[index%4]} />
       })}
     </Timeline>

@@ -22,13 +22,6 @@ function App() {
           <CustomTimeline />
         </div>
       </div>
-      {/* <div className='custom-backgound'>
-        <div style={{fontFamily:'customCursiveMini', color:'#ECE3CE', fontSize: '6vw', paddingTop: 20}}>
-          It all starts here...
-        </div>
-        <CustomTimeline />
-      </div> */}
-      
     </div>
   );
 }
