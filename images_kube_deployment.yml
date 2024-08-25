@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: us-aesthetic-images-deployment
+  labels:
+    app: us-aesthetic-images
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: us-aesthetic-images
+  template:
+    metadata:
+      labels:
+        app: us-aesthetic-images
+    spec:
+      volumes:
+        - name: us-aesthetic-volume
+          persistentVolumeClaim: 
+            claimName: pvc-us-aesthetic
+      containers:
+      - name: us-aesthetic-images-container
+        image: localhost:32000/us-aesthetic-images
+        ports:
+        - containerPort: 8080
+        volumeMounts:
+          - name: us-aesthetic-volume
+            mountPath: /usr/share/us-aesthetic-volume
+        resources:
+          limits:
+            cpu: "0.2"
+            memory: "128Mi"
+          requests:
+            cpu: "0.2"
+            memory: "128Mi"
+        env:
+        - name: PORT
+          value: "8100"
+        - name: IMAGE_DIRECTORY
+          value: "/usr/share/us-aesthetic-volume"

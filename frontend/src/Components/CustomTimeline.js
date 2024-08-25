@@ -6,17 +6,12 @@ import NightlightRoundRoundedIcon from '@mui/icons-material/NightlightRoundRound
 import NightsStayRoundedIcon from '@mui/icons-material/NightsStayRounded';
 import './CustomStyles/CustomTimeline.css'
 import CustomTimelineItem from './CustomTimelineItem';
-import dandeliImage from '../assests/dandeli.jpeg'
-import wayToHerImage from '../assests/way-to-her.jpeg'
-import collegeDayImage from '../assests/collegeDay.jpeg'
-import daysOfWorkImage from '../assests/daysOfWork.jpeg'
+
 
 const icons = [<StarIcon htmlColor='#eee8aa' />,
                <DarkModeRoundedIcon htmlColor='#eee8aa' />,
                <NightsStayRoundedIcon htmlColor='#eee8aa' />,
                <NightlightRoundRoundedIcon htmlColor='#eee8aa' />]
-
-
 
 export default function CustomTimeline() {
   const [storyData, setStoryData] = React.useState([]);

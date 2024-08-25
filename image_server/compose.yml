@@ -1,0 +1,12 @@
+services:
+  us-images-go:
+    build:
+      tags:
+        - us-aesthetic-images
+        - localhost:32000/us-aesthetic-images
+        - asia-south1-docker.pkg.dev/silicon-outcome-427512-i5/us-image-registry/us-aesthetic-images
+    environment:
+      - PORT=8100
+      - IMAGE_DIRECTORY=.
+    ports:
+      - "8100:8100"

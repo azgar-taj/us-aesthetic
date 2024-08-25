@@ -5,10 +5,11 @@ import (
 	"fmt"
 	"log"
 	"us-aesthetic-backend-go/internal/model"
+
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
-	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 type StoryDB struct {
@@ -57,7 +58,8 @@ func (s *StoryDB) DeleteStoryItem(id string) error {
 }
 
 func (s *StoryDB) UpdateStoryItem(item model.StoryItem) (primitive.ObjectID, error) {
-	_, err := s.collection.UpdateOne(context.Background(), bson.D{{"id", item.Id}}, bson.D{{"$set", item}})
+	formatted_id, _ := primitive.ObjectIDFromHex(item.Id.Hex())
+	_, err := s.collection.UpdateOne(context.Background(), bson.D{{"_id", formatted_id}}, bson.D{{"$set", item}})
 	if err != nil {
 		log.Printf("Failed to update story item: %v", err)
 		return primitive.NilObjectID, err
