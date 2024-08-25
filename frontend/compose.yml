@@ -4,10 +4,11 @@ services:
     build:
       tags:
         - us-aesthetic-frontend
+        - localhost:32000/us-aesthetic-frontend
         - asia-south1-docker.pkg.dev/silicon-outcome-427512-i5/us-image-registry/us-aesthetic-us-frontend
       context: .
       dockerfile: Dockerfile
     ports:
-      - "80:80"
+      - "8081:8081"
     environment:
-      - PORT=80
+      - PORT=8081

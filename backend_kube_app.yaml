@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: us-aesthetic-frontend-app
+  name: us-aesthetic-storyservice-app
 spec:
   selector:
-    app: us-aesthetic-frontend
+    app: us-aesthetic-storyservice
   ports:
   - port: 8080
     targetPort: 8080

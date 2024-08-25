@@ -22,11 +22,11 @@ export default function CustomTimeline() {
   const [storyData, setStoryData] = React.useState([]);
   React.useEffect(() => {
     console.log('Fetching data');
-    fetch('http://api.starandmoon.life/GetAllStoriesData')
+    fetch('http://api.usaesthetic.life/storyservice/story_items')
       .then(response => response.json())
       .then(data => setStoryData(data))
       .catch(error => console.log(error));
-    console.log('Data fetched');
+    console.log('Data fetch triggered');
   }, []);
   return (
     <Timeline position="alternate">
