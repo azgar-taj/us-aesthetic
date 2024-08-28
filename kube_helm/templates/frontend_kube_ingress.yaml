@@ -1,16 +1,16 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: us-aesthetic-frontend-ingress
+  name: {{ .Values.frontend.name }}-ingress
 spec:
   rules:
-    - host: www.usaesthetic.life
+    - host: {{ .Values.frontend.url }}
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: us-aesthetic-frontend-app
+                name: {{ .Values.frontend.name }}-app
                 port:
                   number: 8080

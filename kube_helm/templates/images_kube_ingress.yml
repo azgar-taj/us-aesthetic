@@ -1,16 +1,16 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: us-aesthetic-images-ingress
+  name: {{ .Values.imageService.name }}-ingress
 spec:
   rules:
-    - host: images.usaesthetic.life
+    - host: {{ .Values.imageService.url }}
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: us-aesthetic-images-app
+                name: {{ .Values.imageService.name }}-app
                 port:
-                  number: 8100
+                  number: {{ .Values.imageService.port }}

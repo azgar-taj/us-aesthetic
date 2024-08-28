@@ -1,24 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: us-aesthetic-storyservice-deployment
+  name: {{ .Values.backend.name }}-deployment
   labels:
-    app: us-aesthetic-storyservice
+    app: {{ .Values.backend.name }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: us-aesthetic-storyservice
+      app: {{ .Values.backend.name }}
   template:
     metadata:
       labels:
-        app: us-aesthetic-storyservice
+        app: {{ .Values.backend.name }}
     spec:
       containers:
-      - name: us-aesthetic-storyservice-container
-        image: localhost:32000/us-aesthetic-storyservice
+      - name: {{ .Values.backend.name }}-container
+        image: localhost:32000/{{ .Values.backend.name }}
         ports:
-        - containerPort: 8080
+        - containerPort: {{ .Values.backend.port }}
         resources:
           limits:
             cpu: "0.2"
@@ -28,7 +28,7 @@ spec:
             memory: "128Mi"
         env:
         - name: PORT
-          value: "8080"
+          value: "{{ .Values.backend.port }}"
         - name: MONGO_USERNAME
           valueFrom:
             secretKeyRef:

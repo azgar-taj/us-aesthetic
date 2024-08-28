@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.imageService.name }}-deployment
+  labels:
+    app: {{ .Values.imageService.name }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.imageService.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.imageService.name }}
+    spec:
+      volumes:
+        - name: {{ .Values.imageService.volumeMount.name }}
+          persistentVolumeClaim: 
+            claimName: {{ .Values.storage.persistentStorageClaim.name }}
+      containers:
+      - name: {{ .Values.imageService.name }}-container
+        image: localhost:32000/{{ .Values.imageService.name }}
+        volumeMounts:
+          - name: {{ .Values.imageService.volumeMount.name }}
+            mountPath: {{ .Values.imageService.volumeMount.volumeMountPath }}
+        resources:
+          limits:
+            cpu: "0.2"
+            memory: "128Mi"
+          requests:
+            cpu: "0.2"
+            memory: "128Mi"
+        env:
+        - name: PORT
+          value: {{ .Values.imageService.port | quote}}
+        - name: IMAGE_DIRECTORY
+          value: "{{ .Values.imageService.volumeMount.volumeMountPath }}"

@@ -1,0 +1,31 @@
+# Default values for kube_helm_1.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+imageService:
+  name: us-aesthetic-images
+  port: 8100
+  url: images.usaesthetic.life
+  volumeMount:
+    name: us-aesthetic-volume
+    volumeMountPath: /usr/share/us-aesthetic-volume
+
+storage:
+  storageClass:
+    name: local-storage
+  persistentVolume:
+    name: pv-us-aesthetic
+    localPath: /home/azgartaj/Smrutaj/pv-local
+  persistentStorageClaim:
+    name: pv-us-aesthetic-claim
+
+frontend:
+  name: us-aesthetic-frontend
+  port: 8080
+  url: www.usaesthetic.life
+
+backend:
+  name: us-aesthetic-storyservice
+  port: 8080
+  url: api.usaesthetic.life
+  servicePath: /storyservice/

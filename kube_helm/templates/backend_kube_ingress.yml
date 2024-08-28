@@ -1,16 +1,16 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: us-aesthetic-storyservice-ingress
+  name: {{ .Values.backend.name }}-ingress
 spec:
   rules:
-    - host: api.usaesthetic.life
+    - host: {{ .Values.backend.url }}
       http:
         paths:
-          - path: /storyservice/
+          - path: {{ .Values.backend.servicePath }}
             pathType: Prefix
             backend:
               service:
-                name: us-aesthetic-storyservice-app
+                name: {{ .Values.backend.name }}-app
                 port:
                   number: 8080

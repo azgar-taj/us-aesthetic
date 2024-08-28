@@ -1,24 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: us-aesthetic-frontend-deployment
+  name: {{ .Values.frontend.name }}-deployment
   labels:
-    app: us-aesthetic-frontend
+    app: {{ .Values.frontend.name }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: us-aesthetic-frontend
+      app: {{ .Values.frontend.name }}
   template:
     metadata:
       labels:
-        app: us-aesthetic-frontend
+        app: {{ .Values.frontend.name }}
     spec:
       containers:
-      - name: us-aesthetic-frontend-container
-        image: localhost:32000/us-aesthetic-frontend
+      - name: {{ .Values.frontend.name }}-container
+        image: localhost:32000/{{ .Values.frontend.name }}
         ports:
-        - containerPort: 8080
+        - containerPort: {{ .Values.frontend.port }}
         resources:
           limits:
             cpu: "0.2"
@@ -28,6 +28,6 @@ spec:
             memory: "128Mi"
         env:
         - name: PORT
-          value: "8080"
+          value: {{ .Values.frontend.port | quote}}
         - name: GENERATE_SOURCEMAP
           value: "false"
