@@ -17,7 +17,7 @@ export default function CustomTimeline() {
   const [storyData, setStoryData] = React.useState([]);
   React.useEffect(() => {
     console.log('Fetching data');
-    fetch('http://api.usaesthetic.life/storyservice/story_items')
+    fetch('https://api.smruthitaj.life/storyservice/story_items')
       .then(response => response.json())
       .then(data => setStoryData(data))
       .catch(error => console.log(error));

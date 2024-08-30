@@ -21,10 +21,10 @@ spec:
         - containerPort: {{ .Values.backend.port }}
         resources:
           limits:
-            cpu: "0.2"
+            cpu: "100m"
             memory: "128Mi"
           requests:
-            cpu: "0.2"
+            cpu: "100m"
             memory: "128Mi"
         env:
         - name: PORT

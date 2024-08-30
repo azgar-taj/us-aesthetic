@@ -3,25 +3,19 @@ services:
     build:
       context: ./image_server
       tags:
-        - us-aesthetic-images
         - localhost:32000/us-aesthetic-images
-        - asia-south1-docker.pkg.dev/silicon-outcome-427512-i5/us-image-registry/us-aesthetic-images
     image: localhost:32000/us-aesthetic-images
 
   us-frontend:
     build:
       context: ./frontend
       tags:
-        - us-aesthetic-frontend
         - localhost:32000/us-aesthetic-frontend
-        - asia-south1-docker.pkg.dev/silicon-outcome-427512-i5/us-image-registry/us-aesthetic-frontend
     image: localhost:32000/us-aesthetic-frontend
 
   us-backend-go:
     build:
       context: ./backend
       tags:
-        - us-aesthetic-storyservice
         - localhost:32000/us-aesthetic-storyservice
-        - asia-south1-docker.pkg.dev/silicon-outcome-427512-i5/us-image-registry/us-aesthetic-storyservice
     image: localhost:32000/us-aesthetic-storyservice
