@@ -1,27 +1,28 @@
 import './App.css';
-import './Components/CustomStyles/ParallaxBackground.scss';
 import CustomTimeline from './Components/CustomTimeline';
+import { ParallaxProvider } from 'react-scroll-parallax';
 
 function App() {
   return (
     <div className="App">
-      <div class="bg"></div>
-      <div class="parallax">
-        <div class="parallax-group">
-          <div class="layer"></div>
-          <div class="layer"></div>
-          <div class="layer"></div>
-          <div class="layer"></div>
-          <div class="layer"></div>
-          <div class="layer fill"></div>
-        </div>
-        <div class="content">
-          <div style={{fontFamily:'customCursiveMini', color:'#ECE3CE', fontSize: '6vw', paddingTop: 20}}>
-            It all starts here...
-          </div>
-          <CustomTimeline />
-        </div>
-      </div>
+      <ParallaxProvider>
+            <night-sky
+              id="nightSky"
+              layers="2"
+              density="15"
+              velocity-x="60"
+              velocity-y="60"
+              star-color="#FFF"
+            >
+            </night-sky>
+            <div className='foreground'>
+              <div style={{fontFamily:'customCursiveMini', color:'#ECE3CE', fontSize: '6vw', paddingTop: 20, alignContent: 'center'}}>
+                It all starts here...
+              </div>
+              <CustomTimeline />
+            </div>
+      </ParallaxProvider>
+      {/* </Parallax> */}
     </div>
   );
 }

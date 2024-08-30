@@ -1,11 +1,16 @@
-.App {
-  text-align: center;
+.foreground{
+  align-items: center;
+  display: flex;
+  position:absolute;
+  flex-flow: column;
+  top: 0;
+  left: 0;
 }
 
-.custom-backgound {
-  background-color: #4F6F52;
-  overflow: scroll;
+#nightSky {
+  width: 100vw;
   height: 100vh;
+  position: fixed;
 }
 
 @font-face {

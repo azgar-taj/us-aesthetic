@@ -6,20 +6,20 @@ import TimelineContent from '@mui/lab/TimelineContent';
 import TimelineOppositeContent from '@mui/lab/TimelineOppositeContent';
 import TimelineDot from '@mui/lab/TimelineDot';
 import './CustomStyles/CustomTimelineItem.css';
+import { StoryImage } from './StoryImage';
 
 const CustomTimelineItem = (props) => {
-    const onClickEvent = (args) => {
-        console.log(args);
+    const onClickEvent = (props) => {
+        console.log(props);
     }
 
     return (
-        <TimelineItem key={props.id} onClick={onClickEvent}>
+        <TimelineItem key={props.id} onClick={() => onClickEvent(props)}>
             <TimelineOppositeContent
-            sx={{ m: 'auto 0'}}
-            color="white"
-            >
-                <div className='text-hoverer text-limiter' style={{marginLeft: Number(props.id)%2 === 0 ? 'auto' : '0'}}>
-                {props.date}
+            sx={{ m: 'auto', width: "45vw"}}
+            color="white">
+                <div className='text-hoverer text-limiter'>
+                    {props.date}
                 </div>
             </TimelineOppositeContent>
             <TimelineSeparator>
@@ -30,13 +30,8 @@ const CustomTimelineItem = (props) => {
                 <TimelineConnector sx={{ bgcolor: '#eee8aa' }} />
             </TimelineSeparator>
             <TimelineContent 
-                sx={{ py: '12px', px: 2 }}>
-                <div style={{backgroundImage: `url(${props.imageUrl})`}}
-                    className={'image-cropper'+ (Number(props.id)%2 !== 0 ? ' margin-me-left' : '') +' animate-hover'}>
-                    <p className='para-text' style={{fontSize: '4vw'}}>
-                        {props.content.split(' ').map((word, index) => {return (<React.Fragment key={index}>{word} <br/></React.Fragment>)})}
-                    </p>
-                </div>
+                sx={{ p: 2, width: "45vw" }}>
+                <StoryImage imageUrl={props.imageUrl} id={props.id} content={props.content} />
             </TimelineContent>
         </TimelineItem>
     )

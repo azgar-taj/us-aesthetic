@@ -1,0 +1,33 @@
+.image-cropper {
+    aspect-ratio: 1/1;
+    display: flex;
+    align-items: center;
+    width: 30vw;
+    position: relative;
+    overflow: hidden;
+    border-radius: 50%;
+    background-color: #b3ad65;
+    justify-content: center;
+    background-blend-mode:soft-light;
+    background-size: cover;
+}
+
+.para-text{
+    text-align: center;
+    font-family: customCursiveMini;
+    line-height: 1;
+    color: #ffffff;
+    font-size: 42;
+}
+
+.margin-me-left{
+    margin-left: auto;
+}
+
+.animate-hover {
+    transition: all 0.2s ease-in-out;
+}
+
+.animate-hover:hover {
+    border-radius:10%;  
+}
