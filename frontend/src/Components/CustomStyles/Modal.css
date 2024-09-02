@@ -1,0 +1,22 @@
+
+.charted-paper {
+    line-height: 1;
+    padding: 2%;
+    margin: 2% auto;
+    border-radius: 6px;
+    position: relative;
+}
+.charted-paper p {
+    position: relative;
+    z-index: 2;
+    margin:0;
+}
+.charted-paper:before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: var(--rounded);
+    box-shadow: 0 0 30px #8a4d0f inset;
+    background: radial-gradient(#f9f9f9, #efede9);
+    filter: url(#wavy2) drop-shadow(2px 2px 5px rgba(0, 0, 0, 1));
+}

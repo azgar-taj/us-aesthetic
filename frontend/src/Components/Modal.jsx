@@ -1,19 +1,9 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { Fade } from '@mui/material';
-
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: "75vw",
-  height: "75vh",
-  bgcolor: 'background.paper',
-  p: 4,
-};
+import { StoryPage } from './StoryPage';
+import { TaperedPhoto } from './TaperedPhoto';
+import './CustomStyles/Modal.css';
 
 export const BasicModal = ({open, handleClose, imageUrl, content, date}) => {
 return (
@@ -23,28 +13,17 @@ return (
             onClose={handleClose}
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
+            style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 1}}
         >
             <Fade in={open} timeout={500}>
-                <Box borderRadius={2} sx={style}>
-                    <div style={{ display: 'flex', height: "100%", width:"100%" }}>
-                        <div style={{ flex: 1 }}>
-                            <img style={{ height:"100%", width:"100%"}} src={imageUrl} alt="" />
+                    <div className='charted-paper' style={{ display: 'flex', height: "80%", width:"80%", zIndex: 1}}>
+                        <div style={{ flex: 1, zIndex: 3, display: 'flex'}}>
+                            <TaperedPhoto imageUrl={imageUrl} content={content} />
                         </div>
-                        <div style={{ flex: 1, margin: 12 }}>
-                            <Typography variant="h6">{content}</Typography>
-                            <Typography variant="subtitle1">{date}</Typography>
-                            <Typography variant="body1">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                                vitae nunc id nunc tincidunt tincidunt. Nulla facilisi. Nullam
-                                nec nunc ac nunc lacinia lacinia. Sed auctor, nunc non
-                                ullamcorper tincidunt, nunc mauris semper nunc, id aliquam
-                                mauris nunc id libero. Sed auctor, nunc non ullamcorper
-                                tincidunt, nunc mauris semper nunc, id aliquam mauris nunc id
-                                libero.
-                            </Typography>
+                        <div style={{  display: 'flex', flex: 1, margin: 12, zIndex: 2 }}>
+                            <StoryPage />
                         </div>
                     </div>
-                </Box>
             </Fade>
         </Modal>
     </div>
