@@ -5,7 +5,7 @@ metadata:
   labels:
     app: {{ .Values.imageService.name }}
 spec:
-  replicas: {{ .Values.imageService.replicas}}
+  replicas: {{ .Values.imageService.replicas }}
   selector:
     matchLabels:
       app: {{ .Values.imageService.name }}
@@ -26,13 +26,13 @@ spec:
             mountPath: {{ .Values.imageService.volumeMount.volumeMountPath }}
         resources:
           limits:
-            cpu: "0.2"
+            cpu: "100m"
             memory: "128Mi"
           requests:
-            cpu: "0.2"
+            cpu: "100m"
             memory: "128Mi"
         env:
         - name: PORT
           value: {{ .Values.imageService.port | quote}}
         - name: IMAGE_DIRECTORY
-          value: "{{ .Values.imageService.volumeMount.volumeMountPath }}"
+          value: {{ .Values.imageService.volumeMount.volumeMountPath | quote}}

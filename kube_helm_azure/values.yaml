@@ -1,0 +1,40 @@
+containerRegistry: abtaj.azurecr.io
+ingressClassName: nginx
+imageService:
+  name: us-aesthetic-images
+  port: 8100
+  replicas: 2
+  url: img.smruthitaj.life
+  volumeMount:
+    name: us-aesthetic-volume
+    volumeMountPath: /usr/share/us-aesthetic-volume/
+
+storage:
+  storageClass:
+    name: managed-csi
+  persistentVolume:
+    name: pv-us-aesthetic-azure
+    localPath: /home/azgartaj/Smrutaj/pv-local
+    diskResourceId: /subscriptions/442daeac-eab5-48a0-8e22-ae10acb96013/resourceGroups/MC_star-and-moon-v2_star-and-moon-v2_centralindia/providers/Microsoft.Compute/disks/imagesDisk
+  persistentStorageClaim:
+    name: pvc-us-aesthetic-azure
+
+frontend:
+  name: us-aesthetic-frontend
+  port: 8080
+  replicas: 2
+  url: dashboard.smruthitaj.life
+
+backend:
+  name: us-aesthetic-storyservice
+  port: 8080
+  replicas: 2
+  url: apis.smruthitaj.life
+  servicePath: /storyservice/
+
+authService:
+  name: us-aesthetic-authservice
+  port: 8080
+  replicas: 2
+  url: auth.smruthitaj.life
+  servicePath: /

@@ -3,19 +3,26 @@ services:
     build:
       context: ./image_server
       tags:
-        - localhost:32000/us-aesthetic-images
-    image: localhost:32000/us-aesthetic-images
+        - abtaj.azurecr.io/us-aesthetic-images
+    image: abtaj.azurecr.io/us-aesthetic-images
 
   us-frontend:
     build:
       context: ./frontend
       tags:
-        - localhost:32000/us-aesthetic-frontend
-    image: localhost:32000/us-aesthetic-frontend
+        - abtaj.azurecr.io/us-aesthetic-frontend
+    image: abtaj.azurecr.io/us-aesthetic-frontend
 
   us-backend-go:
     build:
       context: ./backend
       tags:
-        - localhost:32000/us-aesthetic-storyservice
-    image: localhost:32000/us-aesthetic-storyservice
+        - abtaj.azurecr.io/us-aesthetic-storyservice
+    image: abtaj.azurecr.io/us-aesthetic-storyservice
+
+  us-auth-service:
+    build:
+      context: ./auth-service
+      tags:
+        - abtaj.azurecr.io/us-aesthetic-authservice
+    image: abtaj.azurecr.io/us-aesthetic-authservice

@@ -68,6 +68,43 @@ func (s *StoryDB) UpdateStoryItem(item model.StoryItem) (primitive.ObjectID, err
 	return item.Id, nil
 }
 
+func (s *StoryDB) PatchStoryItem(item model.StoryItem) (primitive.ObjectID, error) {
+	formatted_id, _ := primitive.ObjectIDFromHex(item.Id.Hex())
+	current_item, err := s.GetStoryItem(item.Id.Hex())
+	if err != nil {
+		log.Printf("Failed to get story item: %v", err)
+		return primitive.NilObjectID, err
+	}
+	newItem := model.StoryItem{}
+	if item.Date != "" {
+		newItem.Date = item.Date
+	} else {
+		newItem.Date = current_item.Date
+	}
+	if item.Title != "" {
+		newItem.Title = item.Title
+	} else {
+		newItem.Title = current_item.Title
+	}
+	if item.ImageUrl != "" {
+		newItem.ImageUrl = item.ImageUrl
+	} else {
+		newItem.ImageUrl = current_item.ImageUrl
+	}
+	if item.ShortDesc != "" {
+		newItem.ShortDesc = item.ShortDesc
+	} else {
+		newItem.ShortDesc = current_item.ShortDesc
+	}
+	_, err = s.collection.UpdateOne(context.Background(), bson.D{{"_id", formatted_id}}, bson.D{{"$set", newItem}})
+	if err != nil {
+		log.Printf("Failed to patch story item: %v", err)
+		return primitive.NilObjectID, err
+	}
+	log.Println("Patched story item:", formatted_id)
+	return formatted_id, nil
+}
+
 func (s *StoryDB) GetStoryItem(id string) (model.StoryItem, error) {
 	var item model.StoryItem
 	formatted_id, err := primitive.ObjectIDFromHex(id)

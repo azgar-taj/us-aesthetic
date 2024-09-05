@@ -29,6 +29,7 @@ func main() {
 	router.GET("/storyservice/story_items/:id", storyItemController.GetStoryItem)
 	router.POST("/storyservice/story_items", storyItemController.CreateStoryItem)
 	router.PUT("/storyservice/story_items/:id", storyItemController.UpdateStoryItem)
+	router.PATCH("/storyservice/story_items/:id", storyItemController.PatchStoryItem)
 	router.DELETE("/storyservice/story_items/:id", storyItemController.DeleteStoryItem)
 	port := os.Getenv("PORT")
 	fmt.Printf("Server is running on localhost:%s", port)

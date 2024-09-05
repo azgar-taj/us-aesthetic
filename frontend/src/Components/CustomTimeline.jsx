@@ -17,7 +17,7 @@ export default function CustomTimeline() {
   const [storyData, setStoryData] = React.useState([]);
   React.useEffect(() => {
     console.log('Fetching data');
-    fetch('https://api.smruthitaj.life/storyservice/story_items')
+    fetch('https://apis.smruthitaj.life/storyservice/story_items')
       .then(response => response.json())
       .then(data => setStoryData(data))
       .catch(error => console.log(error));
@@ -26,7 +26,7 @@ export default function CustomTimeline() {
   return (
     <Timeline position="alternate">
       {storyData.map((data, index) => {
-        return <CustomTimelineItem key={index} id={index} date={data.date} content={data.title} imageUrl={data.imageUrl} icon={icons[index%4]} />
+        return <CustomTimelineItem key={index} index={index} image={data} icon={icons[index%4]} />
       })}
     </Timeline>
   );

@@ -1,6 +1,8 @@
+containerRegistry: localhost:32000
 imageService:
   name: us-aesthetic-images
   port: 8100
+  replicas: 1
   url: images.smruthitaj.life
   volumeMount:
     name: us-aesthetic-volume
@@ -16,12 +18,21 @@ storage:
     name: pv-us-aesthetic-claim
 
 frontend:
+  replicas: 1
   name: us-aesthetic-frontend
   port: 8080
   url: my.smruthitaj.life
 
 backend:
+  replicas: 1
   name: us-aesthetic-storyservice
   port: 8080
   url: api.smruthitaj.life
   servicePath: /storyservice/
+
+authService:
+  replicas: 1
+  name: us-aesthetic-authservice
+  port: 8080
+  url: auth.smruthitaj.life
+  servicePath: /auth/

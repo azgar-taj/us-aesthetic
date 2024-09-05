@@ -2,7 +2,7 @@ import React from "react";
 import './CustomStyles/TaperedPhoto.css';
 
 
-export const TaperedPhoto = ({imageUrl, content}) => {
+export const TaperedPhoto = ({imageUrl}) => {
     return (
         <div className="image-paper pink">
             <div className="tape-section"></div>

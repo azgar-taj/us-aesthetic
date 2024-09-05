@@ -1,24 +1,25 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Values.backend.name }}-deployment
+  name: {{ .Values.authService.name }}-deployment
   labels:
-    app: {{ .Values.backend.name }}
+    app: {{ .Values.authService.name }}
 spec:
-  replicas: {{ .Values.backend.replicas}}
+  replicas: {{ .Values.authService.replicas }}
   selector:
     matchLabels:
-      app: {{ .Values.backend.name }}
+      app: {{ .Values.authService.name }}
   template:
     metadata:
       labels:
-        app: {{ .Values.backend.name }}
+        app: {{ .Values.authService.name }}
     spec:
       containers:
-      - name: {{ .Values.backend.name }}-container
-        image: {{ .Values.containerRegistry }}/{{ .Values.backend.name }}
+      - name: {{ .Values.authService.name }}-container
+        image: {{ .Values.containerRegistry }}/{{ .Values.authService.name }}
+        imagePullPolicy: Always
         ports:
-        - containerPort: {{ .Values.backend.port }}
+        - containerPort: {{ .Values.authService.port }}
         resources:
           limits:
             cpu: "100m"
@@ -28,7 +29,7 @@ spec:
             memory: "128Mi"
         env:
         - name: PORT
-          value: "{{ .Values.backend.port }}"
+          value: "{{ .Values.authService.port }}"
         - name: MONGO_USERNAME
           valueFrom:
             secretKeyRef:
@@ -44,3 +45,8 @@ spec:
             secretKeyRef:
               name: mongo-credentials
               key: mongo-cluster
+        - name: JWT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: mongo-credentials
+              key: jwt-secret

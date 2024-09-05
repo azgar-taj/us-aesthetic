@@ -9,34 +9,34 @@ import './CustomStyles/CustomTimelineItem.css';
 import { StoryImage } from './StoryImage';
 import { BasicModal } from './Modal'
 
-const CustomTimelineItem = (props) => {
+const CustomTimelineItem = ({index, image, icon}) => {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
   
     return (
         <>
-            <TimelineItem key={props.id} >
+            <TimelineItem key={image.id} >
                 <TimelineOppositeContent
                 sx={{ m: 'auto', width: "30vw"}}
                 color="white">
                     <div className='text-hoverer text-limiter'>
-                        {props.date}
+                        {image.date}
                     </div>
                 </TimelineOppositeContent>
                 <TimelineSeparator sx={{ width: "10vw"}}>
                     <TimelineConnector sx={{ bgcolor: '#eee8aa' }} />
                     <TimelineDot style={{backgroundColor:'#3A4D39'}}>
-                        {props.icon}
+                        {icon}
                     </TimelineDot>
                     <TimelineConnector sx={{ bgcolor: '#eee8aa' }} />
                 </TimelineSeparator>
                 <TimelineContent onClick={() => handleOpen()}
                     sx={{ p: 2, width: "30vw" }}>
-                    <StoryImage imageUrl={props.imageUrl} id={props.id} content={props.content} />
+                    <StoryImage index={index} imageUrl={image.imageUrl} title={image.title} />
                 </TimelineContent>
             </TimelineItem>
-            <BasicModal open={open} handleClose={() => handleClose()} imageUrl={props.imageUrl} content={props.content} date={props.date}/>
+            <BasicModal open={open} handleClose={() => handleClose()} image={image}/>
         </>
     )
 }

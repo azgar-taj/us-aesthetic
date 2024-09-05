@@ -1,9 +1,10 @@
 package api
 
 import (
-	"us-aesthetic-backend-go/internal/model"
-	"us-aesthetic-backend-go/internal/connectors/databases"
 	"net/http"
+	"us-aesthetic-backend-go/internal/connectors/databases"
+	"us-aesthetic-backend-go/internal/model"
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -63,6 +64,20 @@ func (s *StoryItemController) UpdateStoryItem(c *gin.Context) {
 		return
 	}
 	id, err := s.storyDB.UpdateStoryItem(item)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, model.Error{Code: http.StatusInternalServerError, Message: err.Error()})
+		return
+	}
+	c.JSON(http.StatusOK, id)
+}
+
+func (s *StoryItemController) PatchStoryItem(c *gin.Context) {
+	var item model.StoryItem
+	if err := c.ShouldBindJSON(&item); err != nil {
+		c.JSON(http.StatusBadRequest, model.Error{Code: http.StatusBadRequest, Message: err.Error()})
+		return
+	}
+	id, err := s.storyDB.PatchStoryItem(item)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, model.Error{Code: http.StatusInternalServerError, Message: err.Error()})
 		return
