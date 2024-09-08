@@ -48,7 +48,7 @@ func (s *StoryDB) InsertStoryItem(item model.StoryItem) (primitive.ObjectID, err
 
 func (s *StoryDB) DeleteStoryItem(id string) error {
 	formatted_id, _ := primitive.ObjectIDFromHex(id)
-	_, err := s.collection.DeleteOne(context.Background(), bson.D{{"_id", formatted_id}})
+	_, err := s.collection.DeleteOne(context.Background(), bson.D{{Key: "_id", Value: formatted_id}})
 	if err != nil {
 		log.Printf("Failed to delete story item: %v", err)
 		return err
@@ -59,7 +59,7 @@ func (s *StoryDB) DeleteStoryItem(id string) error {
 
 func (s *StoryDB) UpdateStoryItem(item model.StoryItem) (primitive.ObjectID, error) {
 	formatted_id, _ := primitive.ObjectIDFromHex(item.Id.Hex())
-	_, err := s.collection.UpdateOne(context.Background(), bson.D{{"_id", formatted_id}}, bson.D{{"$set", item}})
+	_, err := s.collection.UpdateOne(context.Background(), bson.D{{Key: "_id", Value: formatted_id}}, bson.D{{Key: "$set", Value: item}})
 	if err != nil {
 		log.Printf("Failed to update story item: %v", err)
 		return primitive.NilObjectID, err
@@ -96,7 +96,8 @@ func (s *StoryDB) PatchStoryItem(item model.StoryItem) (primitive.ObjectID, erro
 	} else {
 		newItem.ShortDesc = current_item.ShortDesc
 	}
-	_, err = s.collection.UpdateOne(context.Background(), bson.D{{"_id", formatted_id}}, bson.D{{"$set", newItem}})
+	newItem.Id = item.Id
+	_, err = s.collection.UpdateOne(context.Background(), bson.D{{Key: "_id", Value: formatted_id}}, bson.D{{Key: "$set", Value: newItem}})
 	if err != nil {
 		log.Printf("Failed to patch story item: %v", err)
 		return primitive.NilObjectID, err
@@ -112,7 +113,7 @@ func (s *StoryDB) GetStoryItem(id string) (model.StoryItem, error) {
 		log.Printf("Failed to convert ID to ObjectID: %v", err)
 		return model.StoryItem{}, err
 	}
-	err = s.collection.FindOne(context.Background(), bson.D{{"_id", formatted_id}}).Decode(&item)
+	err = s.collection.FindOne(context.Background(), bson.D{{Key: "_id", Value: formatted_id}}).Decode(&item)
 	if err != nil {
 		log.Printf("Failed to get story item: %v", err)
 		return model.StoryItem{}, err

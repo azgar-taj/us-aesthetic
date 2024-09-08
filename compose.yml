@@ -19,6 +19,13 @@ services:
       tags:
         - abtaj.azurecr.io/us-aesthetic-storyservice
     image: abtaj.azurecr.io/us-aesthetic-storyservice
+    environment:
+      - MONGO_CLUSTER=SmruTajUs
+      - MONGO_USERNAME=us_mongo_user
+      - MONGO_PASSWORD=Apple786786
+      - PORT=8080
+    ports:
+      - 8080:8080
 
   us-auth-service:
     build:
